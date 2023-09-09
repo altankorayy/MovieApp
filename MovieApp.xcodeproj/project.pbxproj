@@ -21,6 +21,7 @@
 		E1264D132AA77BCF000F767A /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1264D122AA77BCF000F767A /* MovieModel.swift */; };
 		E1264D172AA788CA000F767A /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1264D162AA788CA000F767A /* MovieCollectionViewCell.swift */; };
 		E1264D1A2AA78A1E000F767A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = E1264D192AA78A1E000F767A /* SDWebImage */; };
+		E1450A142AACA9F600EDE731 /* HeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1450A132AACA9F600EDE731 /* HeaderModel.swift */; };
 		E189E0F02AAA029300C03AC4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189E0EF2AAA029300C03AC4 /* HomeViewModel.swift */; };
 		E189E0F22AAA0D3800C03AC4 /* NewAndPopularTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189E0F12AAA0D3800C03AC4 /* NewAndPopularTableViewCell.swift */; };
 		E189E0F42AAA15C000C03AC4 /* NewAndPopularViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E189E0F32AAA15C000C03AC4 /* NewAndPopularViewModel.swift */; };
@@ -42,6 +43,7 @@
 		E1264D0E2AA776AF000F767A /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		E1264D122AA77BCF000F767A /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 		E1264D162AA788CA000F767A /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		E1450A132AACA9F600EDE731 /* HeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderModel.swift; sourceTree = "<group>"; };
 		E189E0EF2AAA029300C03AC4 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E189E0F12AAA0D3800C03AC4 /* NewAndPopularTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAndPopularTableViewCell.swift; sourceTree = "<group>"; };
 		E189E0F32AAA15C000C03AC4 /* NewAndPopularViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAndPopularViewModel.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				E1264D122AA77BCF000F767A /* MovieModel.swift */,
+				E1450A132AACA9F600EDE731 /* HeaderModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				E125C6132AA60CCD008A0F9B /* MyNetflixViewController.swift in Sources */,
 				E1264D132AA77BCF000F767A /* MovieModel.swift in Sources */,
 				E125C6152AA6154C008A0F9B /* HomeTableViewCell.swift in Sources */,
+				E1450A142AACA9F600EDE731 /* HeaderModel.swift in Sources */,
 				E125C5F82AA6096B008A0F9B /* AppDelegate.swift in Sources */,
 				E1264D0F2AA776AF000F767A /* APICaller.swift in Sources */,
 				E125C5FA2AA6096B008A0F9B /* SceneDelegate.swift in Sources */,

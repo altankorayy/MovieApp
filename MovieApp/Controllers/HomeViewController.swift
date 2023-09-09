@@ -15,7 +15,7 @@ enum Sections: Int {
     case topRated = 4
 }
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, RandomTrendingMovie {
     
     private let homeTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -27,6 +27,14 @@ class HomeViewController: UIViewController {
     
     let sectionTitles = ["Trendıng Movıes", "Trendıng TV", "Popular", "Upcomıng Movıes", "Top Rated"]
     private let viewModel = HomeViewModel()
+    
+    private var trendingMovieModel = [MovieModel]()
+    private var trendingTVModel = [MovieModel]()
+    private var popularModel = [MovieModel]()
+    private var upcomingModel = [MovieModel]()
+    private var topRatedModel = [MovieModel]()
+    var heroModel: MovieModel?
+    var headerView: HeaderView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,17 +45,34 @@ class HomeViewController: UIViewController {
         homeTableView.delegate = self
         homeTableView.dataSource = self
         
-        let headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
-        homeTableView.tableHeaderView = headerView
-        
         configureNavigationBar()
         
+        viewModel.getTrendingMovies()
+        viewModel.getTrendingTV()
+        viewModel.getPopular()
+        viewModel.getUpcoming()
+        viewModel.getTopRated()
+        
+        viewModel.trendingMoviesDelegate = self
+        viewModel.trendingTVDelegate = self
+        viewModel.popularDelegate = self
+        viewModel.upcomingDelegate = self
+        viewModel.topRatedDelegate = self
+        viewModel.randomTrendingMovieDelegate = self
+        
+        headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
+        homeTableView.tableHeaderView = headerView
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         homeTableView.frame = view.bounds
+    }
+    
+    func randomTrendingMovieDelegate(_ model: [MovieModel]) {
+        let randomTrendingMovieModel = model.randomElement()
+        headerView?.configure(model: HeaderModel(titleName: randomTrendingMovieModel?.original_title ?? "nil", posterUrl: randomTrendingMovieModel?.poster_path ?? "nil"))
     }
     
     private func configureNavigationBar() {
@@ -69,7 +94,47 @@ class HomeViewController: UIViewController {
 
 }
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TrendingMoviesDelegate, TrendingTVDelegate, PopularDelegate, UpcomingDelegate, TopRatedDelegate {
+    
+    func trendingMoviesModel(_ model: [MovieModel]) {
+        self.trendingMovieModel = model
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.homeTableView.reloadData()
+        }
+    }
+    
+    func trendingTVModel(_ model: [MovieModel]) {
+        self.trendingTVModel = model
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.homeTableView.reloadData()
+        }
+    }
+    
+    func popularModel(_ model: [MovieModel]) {
+        self.popularModel = model
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.homeTableView.reloadData()
+        }
+    }
+    
+    func upcomingModel(_ model: [MovieModel]) {
+        self.upcomingModel = model
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.homeTableView.reloadData()
+        }
+    }
+    
+    func topRatedModel(_ model: [MovieModel]) {
+        self.topRatedModel = model
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.homeTableView.reloadData()
+        }
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count
@@ -95,33 +160,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case Sections.trendingMovies.rawValue:
             
-            viewModel.getTrendingMovies()
-            let model = viewModel.trendingMovies
-            cell.configure(model: model)
+            cell.configure(model: trendingMovieModel)
             
         case Sections.trendingTv.rawValue:
             
-            viewModel.getTrendingTV()
-            let model = viewModel.trendingTV
-            cell.configure(model: model)
+            cell.configure(model: trendingTVModel)
             
         case Sections.popular.rawValue:
             
-            viewModel.getPopular()
-            let model = viewModel.popular
-            cell.configure(model: model)
+            cell.configure(model: popularModel)
             
         case Sections.upcomingMovies.rawValue:
             
-            viewModel.getUpcoming()
-            let model = viewModel.upcoming
-            cell.configure(model: model)
+            cell.configure(model: upcomingModel)
             
         case Sections.topRated.rawValue:
             
-            viewModel.getTopRated()
-            let model = viewModel.topRated
-            cell.configure(model: model)
+            cell.configure(model: topRatedModel)
             
         default:
             return UITableViewCell()
