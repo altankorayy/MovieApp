@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, RandomTrendingMovie {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.identifier)
         tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -62,6 +63,9 @@ class HomeViewController: UIViewController, RandomTrendingMovie {
         
         headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
         homeTableView.tableHeaderView = headerView
+        
+        
+        
     }
 
     override func viewDidLayoutSubviews() {
@@ -76,20 +80,25 @@ class HomeViewController: UIViewController, RandomTrendingMovie {
     }
     
     private func configureNavigationBar() {
-        let searchButton = UIBarButtonItem(image: UIImage(named: "explore"), style: .plain, target: self, action: nil)
+        let searchButton = UIBarButtonItem(image: UIImage(named: "explore"), style: .plain, target: self, action: #selector(didTapSearch))
         searchButton.tintColor = .label
         let airplayButton = UIBarButtonItem(image: UIImage(named: "airplay"), style: .plain, target: self, action: nil)
         airplayButton.tintColor = .label
         navigationItem.rightBarButtonItems = [searchButton, airplayButton]
         
-        if let navigationBar = navigationController?.navigationBar {
-            let firstFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width/2, height: navigationBar.frame.height)
-            let firstLabel = UILabel(frame: firstFrame)
-            firstLabel.text = "   For you"
-            firstLabel.textColor = .label
-            firstLabel.font = .systemFont(ofSize: 22, weight: .semibold)
-            navigationBar.addSubview(firstLabel)
-        }
+        let titleLabel = UILabel()
+        titleLabel.font = .systemFont(ofSize: 22, weight: .semibold)
+        titleLabel.textColor = .label
+        titleLabel.text = "For You"
+        let labelBarButton = UIBarButtonItem(customView: titleLabel)
+        navigationItem.leftBarButtonItem = labelBarButton
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+    }
+    
+    @objc private func didTapSearch() {
+        let searchVC = SearchViewController()
+        searchVC.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(searchVC, animated: true)
     }
 
 }

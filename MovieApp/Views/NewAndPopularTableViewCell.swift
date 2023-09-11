@@ -15,7 +15,7 @@ class NewAndPopularTableViewCell: UITableViewCell {
     private let posterImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleToFill
+        image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 8
         image.clipsToBounds = true
         image.layer.masksToBounds = true
@@ -25,7 +25,7 @@ class NewAndPopularTableViewCell: UITableViewCell {
     private let title: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 22, weight: .bold)
+        label.font = .systemFont(ofSize: 23, weight: .bold)
         label.textAlignment = .left
         label.textColor = .label
         label.numberOfLines = 0
@@ -45,7 +45,8 @@ class NewAndPopularTableViewCell: UITableViewCell {
     private let playButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        let image = UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))
+        button.setImage(image, for: .normal)
         button.tintColor = .label
         return button
     }()
@@ -53,7 +54,8 @@ class NewAndPopularTableViewCell: UITableViewCell {
     private let addButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        let image = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))
+        button.setImage(image, for: .normal)
         button.tintColor = .label
         return button
     }()
@@ -61,7 +63,8 @@ class NewAndPopularTableViewCell: UITableViewCell {
     private let shareButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(systemName: "paperplane"), for: .normal)
+        let image = UIImage(systemName: "paperplane", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))
+        button.setImage(image, for: .normal)
         button.tintColor = .label
         return button
     }()
@@ -94,7 +97,7 @@ class NewAndPopularTableViewCell: UITableViewCell {
     
     private func setConstraints() {
         let posterImageViewConstraints = [
-            posterImageView.topAnchor.constraint(equalTo: topAnchor),
+            posterImageView.topAnchor.constraint(equalTo: topAnchor, constant: 25),
             posterImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             posterImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             posterImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.6)
@@ -125,7 +128,7 @@ class NewAndPopularTableViewCell: UITableViewCell {
             overViewLabel.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
             overViewLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             overViewLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
-            overViewLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30)
+            overViewLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ]
         
         NSLayoutConstraint.activate(posterImageViewConstraints)

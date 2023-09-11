@@ -59,16 +59,18 @@ class HeaderView: UIView {
     }
     
     private func applyConstraints() {
-        let playButtonConstraints = [playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 70),
-                                     playButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-                                     playButton.widthAnchor.constraint(equalToConstant: 120),
-                                     playButton.heightAnchor.constraint(equalToConstant: 35)
+        let playButtonConstraints = [
+            playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 70),
+            playButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            playButton.widthAnchor.constraint(equalToConstant: 120),
+            playButton.heightAnchor.constraint(equalToConstant: 35)
         ]
         
-        let addToListButtonConstraints = [addToListButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -70),
-                                          addToListButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-                                          addToListButton.widthAnchor.constraint(equalToConstant: 120),
-                                          addToListButton.heightAnchor.constraint(equalToConstant: 35)
+        let addToListButtonConstraints = [
+            addToListButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -70),
+            addToListButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            addToListButton.widthAnchor.constraint(equalToConstant: 120),
+            addToListButton.heightAnchor.constraint(equalToConstant: 35)
         ]
         
         NSLayoutConstraint.activate(playButtonConstraints)

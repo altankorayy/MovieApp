@@ -14,6 +14,7 @@ class NewAndPopularViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(NewAndPopularTableViewCell.self, forCellReuseIdentifier: NewAndPopularTableViewCell.identifier)
         tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -79,7 +80,7 @@ extension NewAndPopularViewController: UITableViewDelegate, UITableViewDataSourc
             return UITableViewCell()
         }
         
-        let posterUrl = model[indexPath.row].poster_path ?? "nil"
+        let posterUrl = model[indexPath.row].backdrop_path ?? "nil"
         let title = model[indexPath.row].original_title ?? "nil"
         let overView = model[indexPath.row].overview ?? "nil"
         cell.configure(posterUrl: posterUrl, title: title, overView: overView)
@@ -87,10 +88,14 @@ extension NewAndPopularViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 350
+        return 375
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 }
