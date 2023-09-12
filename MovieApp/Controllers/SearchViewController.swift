@@ -18,11 +18,12 @@ class SearchViewController: UIViewController {
         return tableView
     }()
     
-    private let searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.placeholder = "Search movie or tv series."
-        searchBar.sizeToFit()
-        return searchBar
+    private let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: SearchResultViewController())
+        searchController.searchBar.placeholder = "Search movie or tv series."
+        searchController.searchBar.isHidden = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        return searchController
     }()
     
     private let viewModel = SearchViewModel()
@@ -33,7 +34,6 @@ class SearchViewController: UIViewController {
 
         view.backgroundColor = .systemBackground
         view.addSubview(searchTableView)
-        view.addSubview(searchBar)
         
         searchTableView.delegate = self
         searchTableView.dataSource = self
@@ -41,10 +41,9 @@ class SearchViewController: UIViewController {
         viewModel.getTrendingTV()
         viewModel.delegate = self
         
-        searchBar.delegate = self
-        
-        setConstraints()
         configureNavigationBar()
+        
+        searchController.searchResultsUpdater = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -56,12 +55,7 @@ class SearchViewController: UIViewController {
     private func configureNavigationBar() {
         navigationController?.navigationBar.tintColor = .label
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.titleView = searchBar
-        
-    }
-    
-    private func setConstraints() {
-        
+        navigationItem.titleView = searchController.searchBar
     }
 
 }
@@ -96,9 +90,25 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, Tren
     
 }
 
-extension SearchViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard let text = searchBar.text else { return }
-        print(text)
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let query = searchController.searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty,
+              query.trimmingCharacters(in: .whitespaces).count >= 3,
+              let searchControllerVC = searchController.searchResultsController as? SearchResultViewController else { return }
+        
+        APICaller.shared.search(with: query) { result in
+            switch result {
+            case .success(let searchResult):
+                searchControllerVC.searchModel = searchResult
+                
+                DispatchQueue.main.async {
+                    searchControllerVC.searchResultTableView.reloadData()
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
+
 }

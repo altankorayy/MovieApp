@@ -130,6 +130,27 @@ class APICaller {
         }
         task.resume()
     }
+    
+    func search(with query: String, completion: @escaping(Result<[MovieModel], Error>) -> Void) {
+        guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        
+        guard let url = URL(string: "\(Constanst.baseURL)/3/search/tv?api_key=\(Constanst.apiKey)&query=\(query)") else { return }
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard error == nil, let data = data else {
+                completion(.failure(ApiCallError.dataTaskFailed))
+                return
+            }
+            
+            do {
+                let result = try JSONDecoder().decode(MovieModelResponse.self, from: data)
+                completion(.success(result.results))
+            } catch {
+                
+            }
+        }
+        task.resume()
+    }
 }
 
 enum ApiCallError: Error {

@@ -17,20 +17,25 @@ class MyNetflixViewController: UIViewController {
     }
 
     private func configureNavigationBar() {
-        let searchButton = UIBarButtonItem(image: UIImage(named: "explore"), style: .plain, target: self, action: nil)
+        let searchButton = UIBarButtonItem(image: UIImage(named: "explore"), style: .plain, target: self, action: #selector(didTapSearch))
         searchButton.tintColor = .label
         let airplayButton = UIBarButtonItem(image: UIImage(named: "airplay"), style: .plain, target: self, action: nil)
         airplayButton.tintColor = .label
         navigationItem.rightBarButtonItems = [searchButton, airplayButton]
         
-        if let navigationBar = navigationController?.navigationBar {
-            let firstFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width/2, height: navigationBar.frame.height)
-            let firstLabel = UILabel(frame: firstFrame)
-            firstLabel.text = "  My Netflix"
-            firstLabel.font = .systemFont(ofSize: 22, weight: .semibold)
-            firstLabel.textColor = .label
-            navigationBar.addSubview(firstLabel)
-        }
+        let titleLabel = UILabel()
+        titleLabel.font = .systemFont(ofSize: 22, weight: .semibold)
+        titleLabel.textColor = .label
+        titleLabel.text = "New and Popular"
+        let labelBarButton = UIBarButtonItem(customView: titleLabel)
+        navigationItem.leftBarButtonItem = labelBarButton
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+    }
+    
+    @objc private func didTapSearch() {
+        let searchVC = SearchViewController()
+        searchVC.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(searchVC, animated: true)
     }
 
 }
