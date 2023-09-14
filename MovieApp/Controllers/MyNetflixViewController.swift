@@ -26,7 +26,7 @@ class MyNetflixViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.font = .systemFont(ofSize: 22, weight: .semibold)
         titleLabel.textColor = .label
-        titleLabel.text = "New and Popular"
+        titleLabel.text = "My Netflix"
         let labelBarButton = UIBarButtonItem(customView: titleLabel)
         navigationItem.leftBarButtonItem = labelBarButton
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)

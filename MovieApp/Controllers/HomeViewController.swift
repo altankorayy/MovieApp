@@ -64,8 +64,6 @@ class HomeViewController: UIViewController, RandomTrendingMovie {
         headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
         homeTableView.tableHeaderView = headerView
         
-        
-        
     }
 
     override func viewDidLayoutSubviews() {
@@ -166,6 +164,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, Trendi
             return UITableViewCell()
         }
         
+        cell.delegate = self
+        
         switch indexPath.section {
         case Sections.trendingMovies.rawValue:
             
@@ -206,5 +206,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, Trendi
     //For Section Titles
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles[section]
+    }
+}
+
+extension HomeViewController: DidTapCellDelegate {
+    func didTapCell(_ cell: HomeTableViewCell, viewModel: PreviewViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            let previewVC = PreviewViewController()
+            previewVC.configure(with: viewModel)
+            self?.navigationController?.pushViewController(previewVC, animated: true)
+        }
     }
 }

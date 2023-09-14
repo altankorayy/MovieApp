@@ -21,7 +21,6 @@ class SearchViewController: UIViewController {
     private let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: SearchResultViewController())
         searchController.searchBar.placeholder = "Search movie or tv series."
-        searchController.searchBar.isHidden = false
         searchController.hidesNavigationBarDuringPresentation = false
         return searchController
     }()
@@ -56,6 +55,7 @@ class SearchViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .label
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.titleView = searchController.searchBar
+        definesPresentationContext = true
     }
 
 }

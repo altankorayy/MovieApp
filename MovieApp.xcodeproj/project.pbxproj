@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E12219732AB1FB0B0037BA2B /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12219722AB1FB0B0037BA2B /* PreviewViewController.swift */; };
+		E12219752AB1FB520037BA2B /* PreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12219742AB1FB520037BA2B /* PreviewViewModel.swift */; };
+		E12219772AB213220037BA2B /* YoutubeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12219762AB213220037BA2B /* YoutubeModel.swift */; };
 		E125C5F82AA6096B008A0F9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E125C5F72AA6096B008A0F9B /* AppDelegate.swift */; };
 		E125C5FA2AA6096B008A0F9B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E125C5F92AA6096B008A0F9B /* SceneDelegate.swift */; };
 		E125C5FC2AA6096B008A0F9B /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E125C5FB2AA6096B008A0F9B /* TabBarController.swift */; };
@@ -32,6 +35,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E12219722AB1FB0B0037BA2B /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		E12219742AB1FB520037BA2B /* PreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewModel.swift; sourceTree = "<group>"; };
+		E12219762AB213220037BA2B /* YoutubeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeModel.swift; sourceTree = "<group>"; };
 		E125C5F42AA6096B008A0F9B /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E125C5F72AA6096B008A0F9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E125C5F92AA6096B008A0F9B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 				E125C6122AA60CCD008A0F9B /* MyNetflixViewController.swift */,
 				E1758EFB2AACCA7400CE1BE4 /* SearchViewController.swift */,
 				E128DA972AB0B64300E79F66 /* SearchResultViewController.swift */,
+				E12219722AB1FB0B0037BA2B /* PreviewViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -148,6 +155,7 @@
 			children = (
 				E1264D122AA77BCF000F767A /* MovieModel.swift */,
 				E1450A132AACA9F600EDE731 /* HeaderModel.swift */,
+				E12219762AB213220037BA2B /* YoutubeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -158,6 +166,7 @@
 				E189E0EF2AAA029300C03AC4 /* HomeViewModel.swift */,
 				E189E0F32AAA15C000C03AC4 /* NewAndPopularViewModel.swift */,
 				E1F02E9F2AAFA47900AAFC8C /* SearchViewModel.swift */,
+				E12219742AB1FB520037BA2B /* PreviewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -241,6 +250,8 @@
 				E125C5FC2AA6096B008A0F9B /* TabBarController.swift in Sources */,
 				E125C6132AA60CCD008A0F9B /* MyNetflixViewController.swift in Sources */,
 				E1264D132AA77BCF000F767A /* MovieModel.swift in Sources */,
+				E12219772AB213220037BA2B /* YoutubeModel.swift in Sources */,
+				E12219732AB1FB0B0037BA2B /* PreviewViewController.swift in Sources */,
 				E1F02EA02AAFA47900AAFC8C /* SearchViewModel.swift in Sources */,
 				E125C6152AA6154C008A0F9B /* HomeTableViewCell.swift in Sources */,
 				E1450A142AACA9F600EDE731 /* HeaderModel.swift in Sources */,
@@ -249,6 +260,7 @@
 				E125C5FA2AA6096B008A0F9B /* SceneDelegate.swift in Sources */,
 				E189E0F42AAA15C000C03AC4 /* NewAndPopularViewModel.swift in Sources */,
 				E189E0F02AAA029300C03AC4 /* HomeViewModel.swift in Sources */,
+				E12219752AB1FB520037BA2B /* PreviewViewModel.swift in Sources */,
 				E1758EFC2AACCA7400CE1BE4 /* SearchViewController.swift in Sources */,
 				E1F02E9C2AAFA07800AAFC8C /* SearchTableViewCell.swift in Sources */,
 				E125C6112AA60C2A008A0F9B /* NewAndPopularViewController.swift in Sources */,

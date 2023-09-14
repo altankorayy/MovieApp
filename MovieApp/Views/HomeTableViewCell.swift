@@ -7,11 +7,16 @@
 
 import UIKit
 
+protocol DidTapCellDelegate: AnyObject {
+    func didTapCell(_ cell: HomeTableViewCell, viewModel: PreviewViewModel)
+}
+
 class HomeTableViewCell: UITableViewCell {
 
     static let identifier = "HomeTableViewCell"
     
     private var model = [MovieModel]()
+    weak var delegate: DidTapCellDelegate?
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -66,5 +71,24 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return model.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let selectedModel = model[indexPath.row]
+        guard let movieName = selectedModel.original_name ?? selectedModel.original_title else { return }
+        
+        APICaller.shared.getVideoFromYoutube(with: movieName + " trailer") { [weak self] result in
+            switch result {
+            case .success(let youtubeModel):
+                guard let overView = selectedModel.overview else { return }
+                let viewModel = PreviewViewModel(title: movieName, youtubeVideo: youtubeModel, titleOverview: overView)
+                guard let strongSelf = self else { return }
+                self?.delegate?.didTapCell(strongSelf, viewModel: viewModel)
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
 }
