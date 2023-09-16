@@ -55,7 +55,27 @@ extension SearchResultViewController: UITableViewDelegate, UITableViewDataSource
         return 90
     }
     
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedModel = searchModel[indexPath.row]
+        guard let title = selectedModel.original_name ?? selectedModel.original_title else { return }
+        guard let overView = selectedModel.overview else { return }
+        guard let backdropPath = selectedModel.backdrop_path else { return }
+        
+        APICaller.shared.getVideoFromYoutube(with: title + " trailer") { result in
+            switch result {
+            case .success(let youtubeModel):
+                let viewModel = PreviewViewModel(title: title, youtubeVideo: youtubeModel, titleOverview: overView, backdrop_path: backdropPath)
+                
+                DispatchQueue.main.async { [weak self] in
+                    let previewVC = PreviewViewController()
+                    previewVC.configure(with: viewModel)
+                    self?.present(previewVC, animated: true)
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
 }

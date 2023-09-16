@@ -21,9 +21,8 @@ class NewAndPopularViewModel {
             case .success(let latest):
                 self?.delegate?.latestTVModel(latest)
             case .failure(let error):
-                print("Error: \(error)")
+                print("Error: \(error.localizedDescription)")
             }
         }
     }
-    
 }

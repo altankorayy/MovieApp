@@ -63,8 +63,9 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource, TrendingTvModelDelegate {
     func getTrendingTV(_ model: [MovieModel]) {
         self.movieModel = model
-        DispatchQueue.main.async {
-            self.searchTableView.reloadData()
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.searchTableView.reloadData()
         }
     }
     
@@ -84,8 +85,28 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, Tren
         return 90
     }
     
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedModel = movieModel[indexPath.row]
+        guard let title = selectedModel.original_name ?? selectedModel.original_title else { return }
+        guard let overView = selectedModel.overview else { return }
+        guard let backdropPath = selectedModel.backdrop_path else { return }
+        
+        APICaller.shared.getVideoFromYoutube(with: title + " trailer") { [weak self] result in
+            switch result {
+            case .success(let youtubeModel):
+                let viewModel = PreviewViewModel(title: title, youtubeVideo: youtubeModel, titleOverview: overView, backdrop_path: backdropPath)
+                
+                DispatchQueue.main.async {
+                    let previewVC = PreviewViewController()
+                    previewVC.configure(with: viewModel)
+                    self?.navigationController?.pushViewController(previewVC, animated: true)
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
     
 }

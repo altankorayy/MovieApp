@@ -16,8 +16,10 @@ class TabBarController: UITabBarController {
         let newAndPopularVC = UINavigationController(rootViewController: NewAndPopularViewController())
         let myNetflixVC = UINavigationController(rootViewController: MyNetflixViewController())
         
-        homeVC.tabBarItem.image = UIImage(named: "homefill")
-        newAndPopularVC.tabBarItem.image = UIImage(named: "popular")?.withRenderingMode(.alwaysOriginal)
+        homeVC.tabBarItem.image = UIImage(systemName: "house")
+        homeVC.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+        newAndPopularVC.tabBarItem.image = UIImage(systemName: "play.rectangle.on.rectangle")
+        newAndPopularVC.tabBarItem.selectedImage = UIImage(systemName: "play.rectangle.on.rectangle.fill")
         let myNetflixImage = UIImage(named: "netflix")?.withRenderingMode(.alwaysOriginal)
         myNetflixVC.tabBarItem.image = myNetflixImage
         

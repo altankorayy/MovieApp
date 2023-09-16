@@ -88,6 +88,9 @@ class PreviewViewController: UIViewController {
         button.tintColor = .label
         return button
     }()
+    
+    var movieModel: PreviewViewModel?
+    private let viewModel = PreviewViewControllerModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,14 +109,33 @@ class PreviewViewController: UIViewController {
         setConstraints()
         
         navigationController?.navigationBar.tintColor = .label
+        
+        downloadButton.addTarget(self, action: #selector(didTapDownloadButton), for: .touchUpInside)
+        
+        viewModel.delegate = self
     }
     
     func configure(with model: PreviewViewModel) {
         titleLabel.text = model.title
         overViewLabel.text = model.titleOverview
+        movieModel = model
         
         guard let url = URL(string: "https://www.youtube.com/embed/\(model.youtubeVideo.id.videoId)") else { return }
         webView.load(URLRequest(url: url))
+    }
+    
+    private func makeAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(okButton)
+        present(alert, animated: true)
+    }
+    
+    @objc private func didTapDownloadButton() {
+        guard let modelMovie = movieModel else { return }
+        
+        viewModel.previewViewModel = modelMovie
+        viewModel.downloadTitles()
     }
     
     private func setConstraints() {
@@ -174,4 +196,14 @@ class PreviewViewController: UIViewController {
         NSLayoutConstraint.activate(shareButtonConstraints)
     }
 
+}
+
+extension PreviewViewController: PassDatabaseError {
+    func databaseError(_ error: Bool) {
+        if error == false {
+            makeAlert(title: "Error", message: "Failed to download.")
+        } else {
+            self.tabBarController?.selectedIndex = 2
+        }
+    }
 }

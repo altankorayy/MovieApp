@@ -37,14 +37,6 @@ class HomeTableViewCell: UITableViewCell {
         collectionView.dataSource = self
     }
     
-    public func configure(model: [MovieModel]) {
-        self.model = model
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.collectionView.reloadData()
-        }
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -53,6 +45,14 @@ class HomeTableViewCell: UITableViewCell {
         super.layoutSubviews()
         
         collectionView.frame = contentView.bounds
+    }
+    
+    public func configure(model: [MovieModel]) {
+        self.model = model
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
     
 }
@@ -78,12 +78,13 @@ extension HomeTableViewCell: UICollectionViewDelegate, UICollectionViewDataSourc
         
         let selectedModel = model[indexPath.row]
         guard let movieName = selectedModel.original_name ?? selectedModel.original_title else { return }
+        guard let backdropPath = selectedModel.backdrop_path else { return }
         
         APICaller.shared.getVideoFromYoutube(with: movieName + " trailer") { [weak self] result in
             switch result {
             case .success(let youtubeModel):
                 guard let overView = selectedModel.overview else { return }
-                let viewModel = PreviewViewModel(title: movieName, youtubeVideo: youtubeModel, titleOverview: overView)
+                let viewModel = PreviewViewModel(title: movieName, youtubeVideo: youtubeModel, titleOverview: overView, backdrop_path: backdropPath)
                 guard let strongSelf = self else { return }
                 self?.delegate?.didTapCell(strongSelf, viewModel: viewModel)
             case .failure(let error):

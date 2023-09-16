@@ -92,15 +92,32 @@ extension NewAndPopularViewController: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 375
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedModel = model[indexPath.row]
+        guard let title = selectedModel.original_title ?? selectedModel.original_name else { return }
+        guard let overView = selectedModel.overview else { return }
+        guard let backdropPath = selectedModel.backdrop_path else { return }
+        
+        APICaller.shared.getVideoFromYoutube(with: title + " trailer") { [weak self] result in
+            switch result {
+            case .success(let youtubeResults):
+                let viewModel = PreviewViewModel(title: title, youtubeVideo: youtubeResults, titleOverview: overView, backdrop_path: backdropPath)
+                
+                DispatchQueue.main.async {
+                    let previewVC = PreviewViewController()
+                    previewVC.configure(with: viewModel)
+                    self?.navigationController?.pushViewController(previewVC, animated: true)
+                }
+                
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
     
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 375
     }
 }
