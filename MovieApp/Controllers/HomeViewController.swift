@@ -15,8 +15,7 @@ enum Sections: Int {
     case topRated = 4
 }
 
-class HomeViewController: UIViewController, RandomTrendingMovie {
-    
+class HomeViewController: UIViewController, HeaderModelProtocol {
     private let homeTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -34,6 +33,7 @@ class HomeViewController: UIViewController, RandomTrendingMovie {
     private var popularModel = [MovieModel]()
     private var upcomingModel = [MovieModel]()
     private var topRatedModel = [MovieModel]()
+    
     var heroModel: MovieModel?
     var headerView: HeaderView?
 
@@ -48,21 +48,12 @@ class HomeViewController: UIViewController, RandomTrendingMovie {
         
         configureNavigationBar()
         
-        viewModel.getTrendingMovies()
-        viewModel.getTrendingTV()
-        viewModel.getPopular()
-        viewModel.getUpcoming()
-        viewModel.getTopRated()
-        
-        viewModel.trendingMoviesDelegate = self
-        viewModel.trendingTVDelegate = self
-        viewModel.popularDelegate = self
-        viewModel.upcomingDelegate = self
-        viewModel.topRatedDelegate = self
-        viewModel.randomTrendingMovieDelegate = self
+        configureView()
         
         headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
         homeTableView.tableHeaderView = headerView
+        
+        viewModel.delegate = self
         
     }
 
@@ -72,9 +63,33 @@ class HomeViewController: UIViewController, RandomTrendingMovie {
         homeTableView.frame = view.bounds
     }
     
-    func randomTrendingMovieDelegate(_ model: [MovieModel]) {
+    func headerModel(_ model: [MovieModel]) {
         let randomTrendingMovieModel = model.randomElement()
         headerView?.configure(model: HeaderModel(titleName: randomTrendingMovieModel?.original_title ?? "nil", posterUrl: randomTrendingMovieModel?.poster_path ?? "nil"))
+    }
+    
+    func configureView() {
+        viewModel.getTrendingMovies()
+        viewModel.getTrendingTV()
+        viewModel.getPopular()
+        viewModel.getUpcoming()
+        viewModel.getTopRated()
+        
+        viewModel.didUpdateData = { [weak self] in
+            self?.configureCell()
+            
+            DispatchQueue.main.async {
+                self?.homeTableView.reloadData()
+            }
+        }
+    }
+    
+    func configureCell() {
+        trendingMovieModel = viewModel.trendingMoviesModel
+        trendingTVModel = viewModel.trendingTVsModel
+        popularModel = viewModel.popularModel
+        upcomingModel = viewModel.upcomingModel
+        topRatedModel = viewModel.topRatedModel
     }
     
     private func configureNavigationBar() {
@@ -101,48 +116,7 @@ class HomeViewController: UIViewController, RandomTrendingMovie {
 
 }
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TrendingMoviesDelegate, TrendingTVDelegate, PopularDelegate, UpcomingDelegate, TopRatedDelegate {
-    
-    func trendingMoviesModel(_ model: [MovieModel]) {
-        self.trendingMovieModel = model
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.homeTableView.reloadData()
-        }
-    }
-    
-    func trendingTVModel(_ model: [MovieModel]) {
-        self.trendingTVModel = model
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.homeTableView.reloadData()
-        }
-    }
-    
-    func popularModel(_ model: [MovieModel]) {
-        self.popularModel = model
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.homeTableView.reloadData()
-        }
-    }
-    
-    func upcomingModel(_ model: [MovieModel]) {
-        self.upcomingModel = model
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.homeTableView.reloadData()
-        }
-    }
-    
-    func topRatedModel(_ model: [MovieModel]) {
-        self.topRatedModel = model
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.homeTableView.reloadData()
-        }
-    }
-    
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count
     }

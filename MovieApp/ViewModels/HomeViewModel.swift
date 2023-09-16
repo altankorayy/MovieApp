@@ -7,45 +7,29 @@
 
 import Foundation
 
-protocol TrendingMoviesDelegate: AnyObject {
-    func trendingMoviesModel(_ model: [MovieModel])
-}
-
-protocol TrendingTVDelegate: AnyObject {
-    func trendingTVModel(_ model: [MovieModel])
-}
-
-protocol PopularDelegate: AnyObject {
-    func popularModel(_ model: [MovieModel])
-}
-
-protocol UpcomingDelegate: AnyObject {
-    func upcomingModel(_ model: [MovieModel])
-}
-
-protocol TopRatedDelegate: AnyObject {
-    func topRatedModel(_ model: [MovieModel])
-}
-
-protocol RandomTrendingMovie: AnyObject {
-    func randomTrendingMovieDelegate(_ model: [MovieModel])
+protocol HeaderModelProtocol: AnyObject {
+    func headerModel(_ model: [MovieModel])
 }
 
 class HomeViewModel {
     
-    weak var trendingMoviesDelegate: TrendingMoviesDelegate?
-    weak var trendingTVDelegate: TrendingTVDelegate?
-    weak var popularDelegate: PopularDelegate?
-    weak var upcomingDelegate: UpcomingDelegate?
-    weak var topRatedDelegate: TopRatedDelegate?
-    weak var randomTrendingMovieDelegate: RandomTrendingMovie?
+    var trendingMoviesModel = [MovieModel]()
+    var trendingTVsModel = [MovieModel]()
+    var popularModel = [MovieModel]()
+    var upcomingModel = [MovieModel]()
+    var topRatedModel = [MovieModel]()
+    
+    var didUpdateData: (() -> Void)?
+    
+    weak var delegate: HeaderModelProtocol?
     
     func getTrendingMovies() {
         APICaller.shared.getTrendingMovies { [weak self] result in
             switch result {
             case .success(let movies):
-                self?.trendingMoviesDelegate?.trendingMoviesModel(movies)
-                self?.randomTrendingMovieDelegate?.randomTrendingMovieDelegate(movies)
+                self?.trendingMoviesModel = movies
+                self?.delegate?.headerModel(movies)
+                self?.didUpdateData?()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }
@@ -56,7 +40,8 @@ class HomeViewModel {
         APICaller.shared.getTrendingTV { [weak self] result in
             switch result {
             case .success(let tvs):
-                self?.trendingTVDelegate?.trendingTVModel(tvs)
+                self?.trendingTVsModel = tvs
+                self?.didUpdateData?()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }
@@ -67,7 +52,8 @@ class HomeViewModel {
         APICaller.shared.getPopular { [weak self] result in
             switch result {
             case .success(let popular):
-                self?.popularDelegate?.popularModel(popular)
+                self?.popularModel = popular
+                self?.didUpdateData?()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }
@@ -78,7 +64,8 @@ class HomeViewModel {
         APICaller.shared.getUpcoming { [weak self] result in
             switch result {
             case .success(let upcoming):
-                self?.upcomingDelegate?.upcomingModel(upcoming)
+                self?.upcomingModel = upcoming
+                self?.didUpdateData?()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }
@@ -89,7 +76,8 @@ class HomeViewModel {
         APICaller.shared.getTopRated { [weak self] result in
             switch result {
             case .success(let topRated):
-                self?.topRatedDelegate?.topRatedModel(topRated)
+                self?.topRatedModel = topRated
+                self?.didUpdateData?()
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
             }
