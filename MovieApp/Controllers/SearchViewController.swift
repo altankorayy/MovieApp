@@ -93,18 +93,18 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource, Tren
         guard let overView = selectedModel.overview else { return }
         guard let backdropPath = selectedModel.backdrop_path else { return }
         
-        APICaller.shared.getVideoFromYoutube(with: title + " trailer") { [weak self] result in
-            switch result {
-            case .success(let youtubeModel):
-                let viewModel = PreviewViewModel(title: title, youtubeVideo: youtubeModel, titleOverview: overView, backdrop_path: backdropPath)
-                
-                DispatchQueue.main.async {
-                    let previewVC = PreviewViewController()
-                    previewVC.configure(with: viewModel)
-                    self?.navigationController?.pushViewController(previewVC, animated: true)
-                }
-            case .failure(let error):
-                print("Error: \(error.localizedDescription)")
+        viewModel.query = title
+        viewModel.overview = overView
+        viewModel.backdropPath = backdropPath
+        
+        viewModel.getYoutubeResult()
+        
+        viewModel.didUpdateData = { [weak self] in
+            DispatchQueue.main.async {
+                let previewVC = PreviewViewController()
+                guard let viewModel = self?.viewModel.previewViewModel else { return }
+                previewVC.configure(with: viewModel)
+                self?.navigationController?.pushViewController(previewVC, animated: true)
             }
         }
     }
@@ -118,16 +118,15 @@ extension SearchViewController: UISearchResultsUpdating {
               query.trimmingCharacters(in: .whitespaces).count >= 3,
               let searchControllerVC = searchController.searchResultsController as? SearchResultViewController else { return }
         
-        APICaller.shared.search(with: query) { result in
-            switch result {
-            case .success(let searchResult):
-                searchControllerVC.searchModel = searchResult
-                
-                DispatchQueue.main.async {
-                    searchControllerVC.searchResultTableView.reloadData()
-                }
-            case .failure(let error):
-                print("Error: \(error.localizedDescription)")
+        viewModel.query = query
+        viewModel.searchForMovie()
+        
+        viewModel.didUpdateData = { [weak self] in
+            guard let model = self?.viewModel.movieModel else { return }
+            searchControllerVC.searchModel = model
+            
+            DispatchQueue.main.async {
+                searchControllerVC.searchResultTableView.reloadData()
             }
         }
     }

@@ -14,6 +14,11 @@ struct Constanst {
     static let youtubeBaseURL = "https://youtube.googleapis.com/youtube/v3/search?"
 }
 
+enum ApiCallError: Error {
+    case dataTaskFailed
+    case jsonDecodeError
+}
+
 class APICaller {
     static let shared = APICaller()
     
@@ -176,7 +181,3 @@ class APICaller {
     }
 }
 
-enum ApiCallError: Error {
-    case dataTaskFailed
-    case jsonDecodeError
-}

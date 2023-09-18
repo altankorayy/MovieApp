@@ -19,6 +19,7 @@ class SearchResultViewController: UIViewController {
     }()
     
     var searchModel = [MovieModel]()
+    private let viewModel = SearchResultViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,18 +64,18 @@ extension SearchResultViewController: UITableViewDelegate, UITableViewDataSource
         guard let overView = selectedModel.overview else { return }
         guard let backdropPath = selectedModel.backdrop_path else { return }
         
-        APICaller.shared.getVideoFromYoutube(with: title + " trailer") { result in
-            switch result {
-            case .success(let youtubeModel):
-                let viewModel = PreviewViewModel(title: title, youtubeVideo: youtubeModel, titleOverview: overView, backdrop_path: backdropPath)
-                
-                DispatchQueue.main.async { [weak self] in
-                    let previewVC = PreviewViewController()
-                    previewVC.configure(with: viewModel)
-                    self?.present(previewVC, animated: true)
-                }
-            case .failure(let error):
-                print("Error: \(error.localizedDescription)")
+        viewModel.query = title
+        viewModel.overview = overView
+        viewModel.backdropPath = backdropPath
+        
+        viewModel.getYoutubeResult()
+        
+        viewModel.didUpdateData = { [weak self] in
+            DispatchQueue.main.async { [weak self] in
+                let previewVC = PreviewViewController()
+                guard let viewModel = self?.viewModel.previewViewModel else { return }
+                previewVC.configure(with: viewModel)
+                self?.present(previewVC, animated: true)
             }
         }
     }
