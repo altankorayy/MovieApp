@@ -13,7 +13,7 @@
 * MVVM
 * CoreData
 * Youtube & TMDB Api 
-* Custom TableView & CollectionView & NavigationController 
+* Custom TableView & CollectionView & NavigationController & Search Bar
 * SDWebImage 
 * Programmatic Constraints 
 * UIKit with no Storyboard 
