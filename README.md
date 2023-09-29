@@ -9,11 +9,11 @@
 ![result](https://github.com/altankorayy/MovieApp/assets/67483357/c9636041-21ff-4733-bcbb-f94da3ba62ff)
 ![preview](https://github.com/altankorayy/MovieApp/assets/67483357/d097b098-b82c-494f-a875-4c81cf4e4959)
 
-Tech Used <br />
-• 🗂️ MVVM <br />
-• 💿 CoreData <br />
-• ▶️ Youtube & TMDB Api <br />
-• ✂️ Custom TableView & CollectionView & NavigationController <br />
-• 🖼️ SDWebImage <br />
-• 📐 Programmatic Constraints <br />
-•  UIKit with no Storyboard <br />
+## Tech Used
+* MVVM
+* CoreData
+* Youtube & TMDB Api 
+* Custom TableView & CollectionView & NavigationController 
+* SDWebImage 
+* Programmatic Constraints 
+* UIKit with no Storyboard 
