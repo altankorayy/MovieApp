@@ -1,8 +1,8 @@
 # MovieApp
 
 <div class="row">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/5f41b1ab-e986-45d3-82cf-11cad22d8565" width="900" height="900" class="col-md-6">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/5a35089b-8408-4493-8540-5584df238d3a" width="900" height="900" class="col-md-6">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/bcc2f2ea-3c9b-4d61-88c6-94878f434788" width="400" height="800" class="col-md-6">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/130dfb94-fc65-4bfd-b71c-045c819cd1c1" width="400" height="800" class="col-md-6">
 </div>
 
 ## Tech Used
@@ -16,21 +16,21 @@
 
 ## Screenshots
 <div class="row">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/5f41b1ab-e986-45d3-82cf-11cad22d8565" width="900" height="900" class="col-md-6">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/5a35089b-8408-4493-8540-5584df238d3a" width="900" height="900" class="col-md-6">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/bcc2f2ea-3c9b-4d61-88c6-94878f434788" width="400" height="800" class="col-md-6">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/130dfb94-fc65-4bfd-b71c-045c819cd1c1" width="400" height="800" class="col-md-6">
 </div>
 
 <div class="row">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/45d9cd2a-304a-4523-a6c9-d3ec2be5bdbb" width="900" height="900" class="col-md-6">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/e0df917e-3215-4cb3-8e82-c96b78de1171" width="900" height="900" class="col-md-6">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/69aefb72-0a86-4fe0-a01d-9b1087fb7dd9" width="400" height="800" class="col-md-6">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/e3263202-ba8a-4d8b-877f-7cd50eb101f5" width="400" height="800" class="col-md-6">
 </div>
 
 <div class="row">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/c1cf372f-5808-4e31-a83e-15a86eb1111c" width="900" height="900" class="col-md-6">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/cec4d2ea-62b6-4fe0-ae87-1b951ae08ca5" width="900" height="900" class="col-md-6">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/ad98e61d-45cf-45fb-84ed-8da3b24e7675" width="400" height="800" class="col-md-6">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/45241f93-52ae-439d-83fa-45a34641d0ec" width="400" height="800" class="col-md-6">
 </div>
 
 <div class="row">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/c9636041-21ff-4733-bcbb-f94da3ba62ff" width="900" height="900" class="col-md-6">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/d097b098-b82c-494f-a875-4c81cf4e4959" width="900" height="800" class="col-md-6">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/84e35ddf-0f2d-4eaa-8f83-68901665f15c" width="400" height="800" class="col-md-6">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/beb4f908-b949-40df-8715-58c5900125d6" width="400" height="800" class="col-md-6">
 </div>
