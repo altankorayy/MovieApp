@@ -6,6 +6,9 @@
   <img src="https://github.com/altankorayy/MovieApp/assets/67483357/69aefb72-0a86-4fe0-a01d-9b1087fb7dd9" width="200" height="400" class="col-md-4">
 </div>
 
+<h2>Support</h2>
+  <p><a href="https://www.buymeacoffee.com/altankoray" target="_blank">Buy Me a Coffee</a>.</p>
+
 ## Tech Used
 * MVVM
 * CoreData
