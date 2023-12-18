@@ -1,9 +1,9 @@
 # MovieApp
 
 <div class="row">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/bcc2f2ea-3c9b-4d61-88c6-94878f434788" width="300" height="600" class="col-md-4">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/130dfb94-fc65-4bfd-b71c-045c819cd1c1" width="300" height="600" class="col-md-4">
-  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/69aefb72-0a86-4fe0-a01d-9b1087fb7dd9" width="300" height="600" class="col-md-4">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/bcc2f2ea-3c9b-4d61-88c6-94878f434788" width="200" height="400" class="col-md-4">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/130dfb94-fc65-4bfd-b71c-045c819cd1c1" width="200" height="400" class="col-md-4">
+  <img src="https://github.com/altankorayy/MovieApp/assets/67483357/69aefb72-0a86-4fe0-a01d-9b1087fb7dd9" width="200" height="400" class="col-md-4">
 </div>
 
 ## Tech Used
