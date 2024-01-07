@@ -6,8 +6,11 @@
   <img src="https://github.com/altankorayy/MovieApp/assets/67483357/69aefb72-0a86-4fe0-a01d-9b1087fb7dd9" width="200" height="400" class="col-md-4">
 </div>
 
-<h2>Support</h2>
-  <p><a href="https://www.buymeacoffee.com/altankoray" target="_blank">Buy Me a Coffee</a>.</p>
+<h2>💖 Support Me</h2>
+  </a>
+  <a href="https://www.buymeacoffee.com/altankoray" target="_blank" rel="noreferrer">
+    <img width="150" alt="yellow-button" src="https://github.com/altankorayy/altankorayy/assets/67483357/e0971e21-a499-448e-8b6b-81a7fede2e90">
+  </a>
 
 ## Tech Used
 * MVVM
